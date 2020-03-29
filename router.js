@@ -17,7 +17,7 @@ authRouter.get('/', ctx => {
 })
 
 testRouter.prefix('/test')
-testRouter.use(secure())
+// testRouter.use(secure())
 testRouter.get('/', ctx => {
   ctx.body = {
     message: "success"

@@ -1,12 +1,19 @@
 require('dotenv').config()
-const app = new (require('koa'))
+
+const server = new (require('koa'))
 const logger = require('koa-logger')
+const bodyParser = require('koa-body')
+
 const router = require('./router')
+const errorHandler = require('./middlewares/error-handler')
 
 require('./assists/mongoose-setup')()
 
-app.use(logger())
-app.use(router())
+server
+  .use(errorHandler())
+  .use(logger())
+  .use(bodyParser())
+  .use(router())
 
 const port = process.env.PORT || 3000
-app.listen(port, () => console.log('Listening on port ' + port))
+server.listen(port, () => console.log('Listening on port ' + port))
