@@ -3,7 +3,14 @@ const postRouter = require('./components/post/post-router')
 const userRouter = require('./components/user/user-router')
 const authRouter = new (require('koa-router'))
 const testRouter = new (require('koa-router'))
+const mainRouter = new (require('koa-router'))
 const { secure, sign } = require('./assists/jwt')
+
+mainRouter.get('/', ctx => {
+  ctx.body = {
+    message: "hi"
+  }
+})
 
 authRouter.prefix('/auth')
 authRouter.get('/', ctx => {
