@@ -4,7 +4,9 @@ const mongoose = require('mongoose');
 const connString = 'mongodb://localhost:27017/alx10ier';
 
 module.exports = () => {
-  mongoose.set('useFindAndModify', false)
+  mongoose
+    .set('useFindAndModify', false)
+    .set('useUnifiedTopology', true)
 
   mongoose.connect(connString, {
     useNewUrlParser: true,

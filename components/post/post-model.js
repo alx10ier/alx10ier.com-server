@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 
+
 const postSchema = mongoose.Schema({
   // author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   time: String,
@@ -12,5 +13,5 @@ const postSchema = mongoose.Schema({
   public: Boolean
 })
 
-let Post = mongoose.model('Post', postSchema)
+const Post = mongoose.model('Post', postSchema)
 module.exports = Post
