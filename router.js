@@ -33,6 +33,7 @@ testRouter.get('/', ctx => {
 
 // combine routers with their routes() and allowedMethods()
 module.exports = combine(
+  mainRouter,
   postRouter,
   userRouter,
   authRouter,
