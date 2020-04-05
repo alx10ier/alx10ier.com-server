@@ -1,30 +1,34 @@
-const Post = require('./post-model')
+const { createPost } = require('./post-resource')
+const marked = require('marked')
 
 module.exports = {
-  createPost: async ctx => {
-    let { title, time, content } = ctx.request.body
-    const newPost = new Post({
-      title,
-      time,
-      content
-    })
-    const post = await newPost.save()
-    ctx.status = 201
-    ctx.body = {
-      status: "success",
-      post
+  create: async ctx => {
+    const { title, text, category, state } = ctx.request.body
+    const html = marked(text)
+    try {
+      const post = await createPost({
+        title,
+        text,
+        html,
+        category,
+        state
+      })
+      ctx.status = 201
+      ctx.body = post
+    } catch (e) {
+      ctx.throw(e.code || 500, e.message)
     }
   },
-  updatePost: ctx => {
+  update: ctx => {
 
   },
-  deletePost: ctx => {
+  remove: ctx => {
 
   },
-  getPost: ctx => {
+  get: ctx => {
 
   },
-  getAllPosts: ctx => {
+  getAll: ctx => {
     ctx.body = {
       message: "this is the post module"
     }

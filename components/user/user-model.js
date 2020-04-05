@@ -10,6 +10,8 @@ const userSchema = mongoose.Schema({
   username: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true }
+}, {
+  timestamps: true
 })
 
 // 不能使用arrow fucntion，因为需要this

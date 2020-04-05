@@ -3,7 +3,7 @@ function errorHandler() {
     try {
       await next()
       // 默认404状态不会报错，需要手动throw
-      if (ctx.status == 404) {
+      if (ctx.status === 404) {
         ctx.throw(404)
       }
     } catch (err) {

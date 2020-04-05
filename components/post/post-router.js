@@ -1,14 +1,12 @@
 const router = new (require('koa-router'))
-const { getPost, getAllPosts, createPost, updatePost, deletePost } = require('./post-controller')
-const body = require('koa-body')
+const { get, getAll, create, update, remove } = require('./post-controller')
 
 // TODO: authorize before post
-
 router.prefix('/posts')
-router.get('/', getAllPosts)
-router.post('/', body(), createPost)
-router.get('/:id', getPost)
-router.post('/:id', body(), updatePost)
-router.delete('/:id', deletePost)
+router.get('/', getAll)
+router.post('/', create)
+router.get('/:id', get)
+router.post('/:id', update)
+router.delete('/:id', remove)
 
 module.exports = router

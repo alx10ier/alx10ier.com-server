@@ -1,5 +1,5 @@
 const router = new (require('koa-router'))
-const { createUser } = require('./user-controller')
+const { create } = require('./user-controller')
 
 router.prefix('/users')
 router.get('/', ctx => {
@@ -7,6 +7,6 @@ router.get('/', ctx => {
     message: 'this is the user module'
   }
 })
-router.post('/', createUser)
+router.post('/', create)
 
 module.exports = router

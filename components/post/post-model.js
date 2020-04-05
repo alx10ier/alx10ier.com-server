@@ -1,16 +1,13 @@
 const mongoose = require('mongoose')
 
-
 const postSchema = mongoose.Schema({
-  // author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  time: String,
-  timestamp: Number,
-  // category: { type: mongoose.Schema.Types.ObjectId, ref: 'PostCategory' },
-  title: String,
-  abs: String,
-  source: String,
-  content: String,
-  public: Boolean
+  title: { type: String, required: true, unique: true },
+  text: String,
+  html: String,
+  category: { type: mongoose.Schema.Types.ObjectId, ref: 'PostCategory' },
+  state: { type: String, enum: ['draft', 'private', 'public'] }
+}, {
+  timestamps: true
 })
 
 const Post = mongoose.model('Post', postSchema)
