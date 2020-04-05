@@ -1,7 +1,6 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
-// TODO: production database in secrete
-const connString = 'mongodb://localhost:27017/alx10ier';
+const connString = process.env.CONN_STRING
 
 module.exports = () => {
   mongoose
@@ -11,7 +10,7 @@ module.exports = () => {
   mongoose.connect(connString, {
     useNewUrlParser: true,
     useCreateIndex: true
-  });
+  })
 
   mongoose.connection
     .on('connected', () => {
@@ -22,5 +21,5 @@ module.exports = () => {
     })
     .on('error', (err) => {
       console.log('Mongoose connection error: ' + err);
-    });
-};
+    })
+}

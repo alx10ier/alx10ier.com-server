@@ -17,7 +17,12 @@ function errorHandler() {
           ctx.body = { error: err.message }
           break
         default:
-          ctx.body = { error: 'We have an unexpected server error' }
+          if (process.env.NODE_ENV === 'development') {
+            throw err
+          } else {
+            // TODO 记录error
+            ctx.body = { error: 'We have an unexpected server error' }
+          }
       }
     }
   }
