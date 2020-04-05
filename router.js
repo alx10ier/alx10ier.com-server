@@ -1,9 +1,11 @@
 const combine = require('koa-combine-routers')
+const Router = require('koa-router')
 const postRouter = require('./components/post/post-router')
 const userRouter = require('./components/user/user-router')
-const authRouter = new (require('koa-router'))
-const testRouter = new (require('koa-router'))
-const mainRouter = new (require('koa-router'))
+const authRouter = new Router()
+const testRouter = new Router()
+const mainRouter = new Router()
+const fileRouter = new Router()
 const { sign } = require('./assists/jwt')
 const { findUserByUsernameOrEmail } = require('./components/user/user-resource')
 
@@ -41,11 +43,17 @@ testRouter.get('/', ctx => {
   }
 })
 
+fileRouter.prefix('/files')
+fileRouter.get('/', async ctx => {
+  ctx.body = { message: 'file router' }
+})
+
 // combine routers with their routes() and allowedMethods()
 module.exports = combine(
   mainRouter,
   postRouter,
   userRouter,
   authRouter,
-  testRouter
+  testRouter,
+  fileRouter
 )
