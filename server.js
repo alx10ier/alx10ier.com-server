@@ -10,6 +10,8 @@ const errorHandler = require('./middlewares/error-handler')
 
 require('./assists/mongoose-setup')()
 
+global.__basedir = __dirname
+
 server
   .use(errorHandler())
   .use(logger())
