@@ -4,6 +4,7 @@ const postRouter = require('./components/post/post-router')
 const userRouter = require('./components/user/user-router')
 const authRouter = require('./components/user/auth-router')
 const fileRouter = require('./components/file/file-router')
+const todoRouter = require('./components/todo/todo-router')
 const testRouter = new Router()
 const mainRouter = new Router()
 
@@ -30,5 +31,6 @@ module.exports = combine(
   userRouter,
   authRouter,
   testRouter,
-  fileRouter
+  fileRouter,
+  todoRouter
 )

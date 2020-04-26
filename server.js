@@ -4,6 +4,7 @@ const server = new (require('koa'))
 const logger = require('koa-logger')
 const bodyParser = require('koa-body')
 const cors = require('@koa/cors')
+const serve = require('koa-static')
 
 const router = require('./router')
 const errorHandler = require('./middlewares/error-handler')
@@ -17,6 +18,7 @@ server
   .use(logger())
   .use(cors())
   .use(bodyParser())
+  .use(serve(__dirname + '/uploads'))
   .use(router())
 
 const port = process.env.PORT || 3000

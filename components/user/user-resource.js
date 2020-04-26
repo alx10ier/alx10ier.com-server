@@ -1,15 +1,15 @@
 const User = require('./user-model')
 const validator = require('validator')
 
-async function findUserByUsernameOrEmail (username) {
+async function getUserByUsernameOrEmail (username) {
   return await User.findOne({ username }) || await User.findOne({ email: username })
 }
 
-async function findUserByUsername (username) {
+async function getUserByUsername (username) {
   return User.findOne({username})
 }
 
-async function findUserByEmail (email) {
+async function getUserByEmail (email) {
   return User.findOne({email})
 }
 
@@ -19,9 +19,9 @@ async function createUser ({ username, email, password }) {
     errorMessage = 'Field missing'
   } else if (!validator.isEmail(email)) {
     errorMessage = 'Email validation failed'
-  } else if (await findUserByUsername(username)) {
+  } else if (await getUserByUsername(username)) {
     errorMessage = 'Username exists'
-  } else if (await findUserByEmail(email)) {
+  } else if (await getUserByEmail(email)) {
     errorMessage = 'Email exists'
   }
   if (errorMessage) {
@@ -36,6 +36,6 @@ async function createUser ({ username, email, password }) {
 }
 
 module.exports = {
-  findUserByUsernameOrEmail,
+  findUserByUsernameOrEmail: getUserByUsernameOrEmail,
   createUser
 }

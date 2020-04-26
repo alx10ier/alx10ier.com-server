@@ -19,10 +19,11 @@ router.post('/images/upload',
     }
     const dirName = makeImageDir()
     const dest = __basedir + '/uploads/images/' + dirName + '/' + name
+    const relativePath = '/images/' + dirName + '/' + name
     try {
-      await saveImage(name, path, dest).then(dest => {
+      await saveImage(name, path, dest, relativePath).then(path => {
         ctx.body = {
-          message: 'image saved to ' + dest
+          message: 'image saved to ' + path
         }
       })
     } catch (e) {

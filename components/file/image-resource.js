@@ -1,7 +1,7 @@
 const fs = require('fs')
 const Image = require('./image-model')
 
-const saveImage = (name, src, dest) => {
+const saveImage = (name, src, dest, relativePath) => {
   return new Promise((resolve, reject) => {
     const render = fs.createReadStream(src)
     const upStream = fs.createWriteStream(dest)
@@ -9,15 +9,19 @@ const saveImage = (name, src, dest) => {
     upStream.on('finish', () => {
       const image = new Image({
         name,
-        path: dest
+        path: relativePath
       })
       image.save()
-      resolve(dest)
+      resolve(relativePath)
     })
     upStream.on('error', (err) => {
       reject(err)
     })
   })
+}
+
+const getImage = async id => {
+  return Image.findById(id)
 }
 
 const makeImageDir = () => {
@@ -31,5 +35,6 @@ const makeImageDir = () => {
 
 module.exports = {
   saveImage,
+  getImage,
   makeImageDir
 }
