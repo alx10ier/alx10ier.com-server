@@ -17,7 +17,8 @@ module.exports = {
   },
   newItem: async (ctx) => {
     try {
-      const { list, name } = ctx.request.body
+      const list = ctx.params.list
+      const name = ctx.request.body.name
       const item = await createItem(list, name)
       ctx.status = 201
       ctx.body = item

@@ -20,8 +20,7 @@ async function createList(name) {
 }
 
 async function createItem(list, name) {
-  const todoList = await TodoList.findOne({ id: list })
-  console.log(todoList)
+  const todoList = await TodoList.findOne({ _id: list })
   if (!todoList) {
     throw { code: 400, message: "list doesn't exist" }
   } else {
